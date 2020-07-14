@@ -85,3 +85,60 @@ ReentrantLock的实现依赖于Java同步器框架AbstractQueueSynchronizer（AQ
 
 AQS使用一个整型的volatile变量（state）维护同步状态
 
+#### 并发编程基础
+
+##### 线程状态
+
+| 状态名称     | 说明                        |
+| ------------ | --------------------------- |
+| NEW          | 初始状态还没调用start()方法 |
+| RUNNABLE     | 运行状态（就绪和运行）      |
+| BLOCKED      | 阻塞状态，线程阻塞于锁      |
+| WAITING      | 等待状态                    |
+| TIME_WAITING | 超时等待状态                |
+| TERMINATED   | 终止状态                    |
+
+Daemon线程，线程构造及启动
+
+##### 理解中断
+
+##### 安全地终止线程
+
+使用interrupt（）或者使用一个boolean变量来控制
+
+##### 线程间通信
+
+volatile和synchronized
+
+等待队列WaitQueue，同步队列SynchronizedQueue
+
+等待/通知的经典范式
+
+```
+等待方
+1.获取对象的锁
+2.若条件不满足，调用对象的wait（）方法，被通知后仍要检查对象
+3.条件满足后执行对应的逻辑
+synchronized(对象){
+	while(条件不满足){
+		对象.wait()
+	}
+	对应的处理逻辑
+}
+```
+
+``` 
+通知方
+1.获取对象的锁
+2.改变条件
+3，通知所有等待在对象上的线程
+synchronized(对象){
+	改变条件
+	对象.notifyAll();
+}
+```
+
+##### ThreadLocal
+
+##### 等待超时模式
+
